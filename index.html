@@ -1,62 +1,456 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Samuel Iyoha (2025/C/CSC/1089) | COS 106 Student Portfolio</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Samuel Iyoha (2025/C/CSC/1089) | COS 106 Student Portfolio & Academic Planner</title>
+  <!-- Tailwind CSS CDN for Modern UI -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- External CSS Stylesheet (COS 106 Requirement) -->
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-    <header class="site-header">
-        <div class="container nav-container">
-            <a href="index.html" class="logo">Samuel Iyoha <span>2025/C/CSC/1089 • @SamYoha99</span></a>
-            <nav>
-                <ul class="nav-links">
-                    <li><a href="index.html" class="active">Home</a></li>
-                    <li><a href="about.html">About Me</a></li>
-                    <li><a href="projects.html">Projects</a></li>
-                    <li><a href="planner.html">Academic Planner</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </nav>
+<body class="min-h-screen flex flex-col bg-slate-50 text-slate-900">
+
+  <!-- Top Academic Verification Bar -->
+  <div class="bg-slate-950 text-slate-300 text-xs border-b border-slate-800 px-4 py-2">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+      <div class="flex flex-wrap items-center gap-2">
+        <span class="px-2 py-0.5 rounded bg-blue-600 text-white font-bold mono">COS 106</span>
+        <span class="font-semibold text-white">Samuel Iyoha</span>
+        <span class="text-slate-500">|</span>
+        <span class="mono text-emerald-400 font-semibold">Matric: 2025/C/CSC/1089</span>
+        <span class="hidden md:inline text-slate-400">| MIVA Open University</span>
+      </div>
+      <a href="https://github.com/SamYoha99" target="_blank" rel="noopener noreferrer"
+         class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-white font-mono text-xs transition">
+        <span>GitHub: @SamYoha99</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Navigation Header -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b border-slate-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <button onclick="showPage('home')" class="flex items-center gap-3 text-left">
+        <div class="w-10 h-10 rounded-xl bg-blue-600 text-white font-extrabold flex items-center justify-center shadow">
+          SI
         </div>
-    </header>
+        <div>
+          <span class="font-extrabold text-slate-900 text-base block leading-none">Samuel Iyoha</span>
+          <span class="mono text-[11px] text-blue-600 font-semibold">2025/C/CSC/1089</span>
+        </div>
+      </button>
 
-    <main class="container">
-        <section class="hero">
-            <div class="hero-text">
-                <span class="badge">COS 106 Term Project • Matric No: 2025/C/CSC/1089</span>
-                <h1>Welcome! I'm Samuel Iyoha</h1>
-                <p>I am a Computer Science undergraduate (Matric No: 2025/C/CSC/1089) at MIVA Open University passionate about software engineering, responsive web design, and academic excellence. Explore my open-source code at <a href="https://github.com/SamYoha99" target="_blank">github.com/SamYoha99</a>.</p>
-                <div class="btn-group">
-                    <a href="projects.html" class="btn btn-primary">View My Projects</a>
-                    <a href="planner.html" class="btn btn-outline">Open Academic Planner</a>
+      <!-- Desktop Menu -->
+      <nav class="hidden md:flex items-center gap-1.5">
+        <button onclick="showPage('home')" data-page="home" class="nav-btn active px-4 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-100 transition">1. Home</button>
+        <button onclick="showPage('about')" data-page="about" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-100 transition">2. About Me</button>
+        <button onclick="showPage('projects')" data-page="projects" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-100 transition">3. Projects</button>
+        <button onclick="showPage('planner')" data-page="planner" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-100 transition">4. Academic Planner</button>
+        <button onclick="showPage('contact')" data-page="contact" class="nav-btn px-4 py-2 rounded-xl text-sm font-semibold text-slate-700 hover:bg-slate-100 transition">5. Contact</button>
+      </nav>
+
+      <!-- Mobile Menu Button -->
+      <button onclick="toggleMobileMenu()" class="md:hidden px-3 py-2 rounded-lg border border-slate-200 text-slate-700 font-semibold text-sm">
+        Menu ☰
+      </button>
+    </div>
+
+    <!-- Mobile Dropdown -->
+    <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 py-3 space-y-1">
+      <button onclick="showPage('home')" class="block w-full text-left px-3 py-2 rounded-lg font-semibold text-sm hover:bg-slate-100">1. Homepage</button>
+      <button onclick="showPage('about')" class="block w-full text-left px-3 py-2 rounded-lg font-semibold text-sm hover:bg-slate-100">2. About Me</button>
+      <button onclick="showPage('projects')" class="block w-full text-left px-3 py-2 rounded-lg font-semibold text-sm hover:bg-slate-100">3. Projects</button>
+      <button onclick="showPage('planner')" class="block w-full text-left px-3 py-2 rounded-lg font-semibold text-sm hover:bg-slate-100">4. Academic Planner</button>
+      <button onclick="showPage('contact')" class="block w-full text-left px-3 py-2 rounded-lg font-semibold text-sm hover:bg-slate-100">5. Contact</button>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT CONTAINER -->
+  <main class="flex-1">
+
+    <!-- ================= 1. HOMEPAGE ================= -->
+    <section id="page-home" class="page-section active">
+      <div class="hero-mesh text-white py-16 lg:py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          <div class="lg:col-span-7 space-y-6">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-500/20 border border-blue-400/30 text-blue-200 text-xs font-semibold">
+              <span>Welcome to My Academic Portfolio & Management Portal</span>
+            </div>
+            <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight leading-tight">
+              Hello, I'm <span class="text-blue-400">Samuel Iyoha</span>
+            </h1>
+            <p class="mono text-sm text-emerald-300 font-semibold">
+              Matric No: 2025/C/CSC/1089 • B.Sc. Computer Science • MIVA Open University
+            </p>
+            <p class="text-slate-300 text-base sm:text-lg leading-relaxed max-w-2xl">
+              I am a Computer Science undergraduate passionate about software engineering, responsive web architecture, and building digital tools that elevate student productivity. This platform showcases my academic profile, technical projects, and interactive study planner for <strong>COS 106 (Introduction to Web Technologies)</strong>.
+            </p>
+            <div class="flex flex-wrap gap-3 pt-2">
+              <button onclick="showPage('projects')" class="px-6 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm shadow-lg transition">
+                Explore My Projects →
+              </button>
+              <button onclick="showPage('planner')" class="px-6 py-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold text-sm transition">
+                Open Academic Planner
+              </button>
+              <a href="https://github.com/SamYoha99" target="_blank" rel="noopener noreferrer"
+                 class="px-5 py-3 rounded-xl bg-slate-900/80 hover:bg-slate-900 border border-slate-700 text-slate-200 font-mono text-sm transition">
+                GitHub @SamYoha99
+              </a>
+            </div>
+          </div>
+
+          <!-- Student Profile Card & Photo -->
+          <div class="lg:col-span-5 flex justify-center">
+            <div class="bg-slate-900/90 border border-slate-700 rounded-3xl p-6 max-w-sm w-full shadow-2xl text-center">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=500&q=80"
+                   alt="Samuel Iyoha Portrait"
+                   class="w-36 h-36 rounded-2xl object-cover mx-auto border-4 border-blue-500 shadow-lg mb-4" />
+              <h2 class="text-xl font-bold text-white">Samuel Iyoha</h2>
+              <p class="mono text-xs text-blue-400 mt-1">2025/C/CSC/1089</p>
+              <p class="text-xs text-slate-400 mt-1">Department of Computer Science</p>
+              <div class="mt-4 pt-4 border-t border-slate-800 grid grid-cols-3 gap-2 text-center">
+                <div>
+                  <span class="block text-lg font-extrabold text-white">100L</span>
+                  <span class="text-[11px] text-slate-400">Level</span>
                 </div>
+                <div>
+                  <span class="block text-lg font-extrabold text-emerald-400">4.85</span>
+                  <span class="text-[11px] text-slate-400">Target CGPA</span>
+                </div>
+                <div>
+                  <span class="block text-lg font-extrabold text-blue-400">COS 106</span>
+                  <span class="text-[11px] text-slate-400">Course</span>
+                </div>
+              </div>
             </div>
-            <div class="hero-photo">
-                <img src="https://images.unsplash.com/photo-1531384441138-2736e62e0919?auto=format&fit=crop&w=600&q=80" alt="Portrait of Samuel Iyoha">
-            </div>
-        </section>
+          </div>
+        </div>
+      </div>
 
-        <section class="multimedia-card">
-            <h2>Campus Technology Introduction (HTML5 Video & Audio Multimedia)</h2>
-            <video controls width="100%">
-                <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4">
-                Your browser does not support HTML5 video.
-            </video>
-            <div style="margin-top: 1rem;">
-                <p><strong>Audio Welcome Note:</strong></p>
-                <audio controls>
-                    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-                    Your browser does not support the audio element.
+      <!-- Multimedia Requirement Section (Video + Audio) -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+        <div class="bg-white rounded-3xl border border-slate-200 p-6 sm:p-8 shadow-sm">
+          <span class="text-xs font-bold uppercase tracking-wider text-blue-600">HTML5 Multimedia Requirement</span>
+          <h2 class="text-2xl font-extrabold text-slate-900 mt-1 mb-6">Campus Web Technologies Overview & Study Audio</h2>
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <div>
+              <video controls class="w-full rounded-2xl border border-slate-200 shadow-sm bg-slate-950" poster="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=900&q=80">
+                <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" type="video/mp4" />
+                Your browser does not support the HTML5 video element.
+              </video>
+            </div>
+            <div class="space-y-4">
+              <h3 class="text-lg font-bold text-slate-900">Audio Study Note: Introduction to Semantic HTML & DOM</h3>
+              <p class="text-sm text-slate-600">
+                Listen to a quick audio summary covering semantic HTML5 tags, responsive CSS Grid layouts, and client-side JavaScript validation prepared for COS 106.
+              </p>
+              <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+                <audio controls class="w-full">
+                  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg" />
+                  Your browser does not support the audio element.
                 </audio>
+              </div>
             </div>
-        </section>
-    </main>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <footer>
-        <p>&copy; 2026 Samuel Iyoha (2025/C/CSC/1089) • <a href="https://github.com/SamYoha99" target="_blank" style="color:#2dd4bf;">github.com/SamYoha99</a> | COS 106 - MIVA Open University</p>
-    </footer>
-    <script src="script.js"></script>
+    <!-- ================= 2. ABOUT ME PAGE ================= -->
+    <section id="page-about" class="page-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
+      <div>
+        <span class="text-xs font-bold uppercase tracking-wider text-blue-600">Student Profile</span>
+        <h2 class="text-3xl font-extrabold text-slate-900 mt-1">About Samuel Iyoha (2025/C/CSC/1089)</h2>
+      </div>
+
+      <!-- Educational Background Table (HTML Table Requirement) -->
+      <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm overflow-x-auto">
+        <h3 class="text-lg font-bold text-slate-900 mb-4">Educational Background</h3>
+        <table class="w-full text-left border-collapse text-sm">
+          <thead>
+            <tr class="bg-slate-900 text-white">
+              <th class="p-3.5 rounded-tl-xl">Institution</th>
+              <th class="p-3.5">Programme / Qualification</th>
+              <th class="p-3.5">Matric / ID</th>
+              <th class="p-3.5 rounded-tr-xl">Period & Status</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-200">
+            <tr class="hover:bg-slate-50">
+              <td class="p-3.5 font-bold text-slate-900">MIVA Open University</td>
+              <td class="p-3.5">B.Sc. Computer Science</td>
+              <td class="p-3.5 mono font-semibold text-blue-600">2025/C/CSC/1089</td>
+              <td class="p-3.5"><span class="px-2.5 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-700">2025 – Present (Active)</span></td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="p-3.5 font-bold text-slate-900">Web Development Bootcamp</td>
+              <td class="p-3.5">Frontend Engineering (HTML5, CSS3, JavaScript, Git)</td>
+              <td class="p-3.5 mono text-slate-600">@SamYoha99</td>
+              <td class="p-3.5">2024 – Completed</td>
+            </tr>
+            <tr class="hover:bg-slate-50">
+              <td class="p-3.5 font-bold text-slate-900">Senior Secondary School</td>
+              <td class="p-3.5">West African Senior School Certificate (WASSCE)</td>
+              <td class="p-3.5 mono text-slate-600">Distinction in Sciences</td>
+              <td class="p-3.5">Graduated</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Technical Skills, Career Aspirations & Hobbies -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+          <h3 class="text-lg font-bold text-slate-900 mb-3">Technical Skills</h3>
+          <div class="space-y-3 text-sm">
+            <div>
+              <div class="flex justify-between font-semibold mb-1"><span>HTML5 & Semantic Web</span><span>95%</span></div>
+              <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden"><div class="bg-blue-600 h-full" style="width:95%"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between font-semibold mb-1"><span>CSS3 (Flexbox & Grid)</span><span>90%</span></div>
+              <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden"><div class="bg-blue-600 h-full" style="width:90%"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between font-semibold mb-1"><span>JavaScript (ES6+ & DOM)</span><span>85%</span></div>
+              <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden"><div class="bg-emerald-600 h-full" style="width:85%"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between font-semibold mb-1"><span>Git & GitHub (@SamYoha99)</span><span>88%</span></div>
+              <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden"><div class="bg-slate-800 h-full" style="width:88%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+          <h3 class="text-lg font-bold text-slate-900 mb-3">Career Aspirations</h3>
+          <ol class="list-decimal list-inside space-y-2.5 text-sm text-slate-700">
+            <li>Graduate with First Class Honours in Computer Science at MIVA Open University.</li>
+            <li>Become a Full-Stack Software Engineer building scalable cloud and fintech platforms across Africa.</li>
+            <li>Contribute to open-source developer tools on GitHub (<strong>@SamYoha99</strong>).</li>
+            <li>Mentor fellow university students in modern web technologies.</li>
+          </ol>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+          <h3 class="text-lg font-bold text-slate-900 mb-3">Hobbies & Interests</h3>
+          <ul class="list-disc list-inside space-y-2.5 text-sm text-slate-700">
+            <li>Building web applications & UI prototypes</li>
+            <li>Algorithmic problem solving & coding challenges</li>
+            <li>Reading software architecture articles</li>
+            <li>Playing strategic chess & football</li>
+            <li>Collaborating on student tech communities</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 3. PROJECTS PAGE ================= -->
+    <section id="page-projects" class="page-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+      <div>
+        <span class="text-xs font-bold uppercase tracking-wider text-blue-600">Portfolio Showcase</span>
+        <h2 class="text-3xl font-extrabold text-slate-900 mt-1">Featured Academic & Web Projects</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Project 1 -->
+        <article class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm card-hover flex flex-col">
+          <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=700&q=80" alt="MIVA CGPA Calculator" class="h-48 w-full object-cover" />
+          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+            <div>
+              <span class="text-xs font-bold px-2.5 py-1 rounded bg-blue-50 text-blue-700">JavaScript • Academic Tool</span>
+              <h3 class="text-xl font-bold text-slate-900 mt-3">1. MIVA Smart CGPA Calculator</h3>
+              <p class="text-sm text-slate-600 mt-2">
+                An interactive grade-point calculator tailored for MIVA Open University students to compute semester GPA and cumulative standing dynamically.
+              </p>
+            </div>
+            <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold">
+              <a href="https://github.com/SamYoha99" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">GitHub Repo (@SamYoha99) →</a>
+              <button onclick="showPage('planner')" class="text-slate-600 hover:text-slate-900">Try Planner</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 2 -->
+        <article class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm card-hover flex flex-col">
+          <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=700&q=80" alt="Campus Study Resource Hub" class="h-48 w-full object-cover" />
+          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+            <div>
+              <span class="text-xs font-bold px-2.5 py-1 rounded bg-emerald-50 text-emerald-700">HTML5 • CSS Grid</span>
+              <h3 class="text-xl font-bold text-slate-900 mt-3">2. CSC 100L Resource Directory</h3>
+              <p class="text-sm text-slate-600 mt-2">
+                A responsive study portal organizing lecture slides, past questions, and weekly lab exercises for COS 106 and MTH 102 students.
+              </p>
+            </div>
+            <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold">
+              <a href="https://github.com/SamYoha99" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">GitHub Repo (@SamYoha99) →</a>
+              <span class="text-emerald-600">Responsive UI</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 3 -->
+        <article class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm card-hover flex flex-col">
+          <img src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=700&q=80" alt="Academic Task Planner" class="h-48 w-full object-cover" />
+          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+            <div>
+              <span class="text-xs font-bold px-2.5 py-1 rounded bg-purple-50 text-purple-700">DOM • LocalStorage</span>
+              <h3 class="text-xl font-bold text-slate-900 mt-3">3. Interactive Academic Task Planner</h3>
+              <p class="text-sm text-slate-600 mt-2">
+                A full-featured task management app enabling students to add coursework deadlines, mark tasks completed, and persist data in the browser.
+              </p>
+            </div>
+            <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold">
+              <a href="https://github.com/SamYoha99" target="_blank" rel="noopener noreferrer" class="text-blue-600 hover:underline">GitHub Repo (@SamYoha99) →</a>
+              <button onclick="showPage('planner')" class="text-blue-600 hover:underline">Launch App →</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ================= 4. ACADEMIC PLANNER PAGE ================= -->
+    <section id="page-planner" class="page-section max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-blue-600">JavaScript Task Management System</span>
+          <h2 class="text-3xl font-extrabold text-slate-900 mt-1">Interactive Academic Planner</h2>
+        </div>
+        <div class="flex gap-3 text-center">
+          <div class="px-4 py-2 rounded-xl bg-white border border-slate-200 shadow-sm">
+            <span id="stat-total" class="block text-xl font-extrabold text-slate-900">0</span>
+            <span class="text-[11px] text-slate-500 font-semibold">Total</span>
+          </div>
+          <div class="px-4 py-2 rounded-xl bg-white border border-slate-200 shadow-sm">
+            <span id="stat-pending" class="block text-xl font-extrabold text-amber-600">0</span>
+            <span class="text-[11px] text-slate-500 font-semibold">Pending</span>
+          </div>
+          <div class="px-4 py-2 rounded-xl bg-white border border-slate-200 shadow-sm">
+            <span id="stat-completed" class="block text-xl font-extrabold text-emerald-600">0</span>
+            <span class="text-[11px] text-slate-500 font-semibold">Completed</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add Task Form -->
+      <form onsubmit="addTask(event)" class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
+        <h3 class="text-base font-bold text-slate-900">Add New Academic Task</h3>
+        <p id="planner-error" class="hidden text-xs font-bold text-red-600 bg-red-50 p-3 rounded-lg border border-red-200"></p>
+        <div class="grid grid-cols-1 sm:grid-cols-12 gap-4">
+          <div class="sm:col-span-5">
+            <label class="block text-xs font-bold text-slate-700 mb-1">Task Title *</label>
+            <input id="task-title" type="text" placeholder="e.g., Study CSS Grid for COS 106 Quiz"
+                   class="w-full px-3.5 py-2.5 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-blue-600" />
+          </div>
+          <div class="sm:col-span-2">
+            <label class="block text-xs font-bold text-slate-700 mb-1">Course</label>
+            <select id="task-course" class="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-sm bg-white">
+              <option value="COS 106">COS 106</option>
+              <option value="CSC 102">CSC 102</option>
+              <option value="MTH 102">MTH 102</option>
+              <option value="GST 104">GST 104</option>
+            </select>
+          </div>
+          <div class="sm:col-span-2">
+            <label class="block text-xs font-bold text-slate-700 mb-1">Priority</label>
+            <select id="task-priority" class="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-sm bg-white">
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
+            </select>
+          </div>
+          <div class="sm:col-span-3">
+            <label class="block text-xs font-bold text-slate-700 mb-1">Due Date</label>
+            <input id="task-date" type="date" value="2025-05-25"
+                   class="w-full px-3 py-2.5 rounded-xl border border-slate-300 text-sm" />
+          </div>
+        </div>
+        <button type="submit" class="px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow transition">
+          + Add Task to Planner
+        </button>
+      </form>
+
+      <!-- Filter Tabs & Task List -->
+      <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm space-y-4">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-4">
+          <h3 class="font-bold text-slate-900">Your Scheduled Tasks</h3>
+          <div class="flex gap-2">
+            <button onclick="filterTasks('all')" data-filter="all" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-bold bg-blue-600 text-white">All</button>
+            <button onclick="filterTasks('pending')" data-filter="pending" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600">Pending</button>
+            <button onclick="filterTasks('completed')" data-filter="completed" class="filter-btn px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-slate-100 text-slate-600">Completed</button>
+          </div>
+        </div>
+        <ul id="task-list" class="space-y-3"></ul>
+      </div>
+    </section>
+
+    <!-- ================= 5. CONTACT PAGE ================= -->
+    <section id="page-contact" class="page-section max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+      <div>
+        <span class="text-xs font-bold uppercase tracking-wider text-blue-600">JavaScript Form Validation</span>
+        <h2 class="text-3xl font-extrabold text-slate-900 mt-1">Contact Samuel Iyoha</h2>
+        <p class="text-sm text-slate-600 mt-1">Matric No: 2025/C/CSC/1089 • GitHub: <a href="https://github.com/SamYoha99" target="_blank" class="text-blue-600 font-semibold underline">@SamYoha99</a></p>
+      </div>
+
+      <form id="contact-form" onsubmit="validateContactForm(event)" novalidate class="bg-white rounded-2xl border border-slate-200 p-6 sm:p-8 shadow-sm space-y-5">
+        <div id="contact-success" class="hidden p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-sm font-semibold">
+          ✓ Message validated and sent! All fields passed JavaScript validation (non-empty, valid email format, and digits-only phone number).
+        </div>
+
+        <div>
+          <label for="contact-name" class="block text-xs font-bold uppercase text-slate-700 mb-1.5">Full Name *</label>
+          <input id="contact-name" type="text" placeholder="Enter your full name"
+                 class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-blue-600" />
+          <p id="err-name" class="hidden text-xs font-semibold text-red-600 mt-1"></p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <div>
+            <label for="contact-email" class="block text-xs font-bold uppercase text-slate-700 mb-1.5">Email Address *</label>
+            <input id="contact-email" type="email" placeholder="name@example.com"
+                   class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-blue-600" />
+            <p id="err-email" class="hidden text-xs font-semibold text-red-600 mt-1"></p>
+          </div>
+
+          <div>
+            <label for="contact-phone" class="block text-xs font-bold uppercase text-slate-700 mb-1.5">Phone Number (Digits Only) *</label>
+            <input id="contact-phone" type="tel" placeholder="08012345678"
+                   class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-blue-600" />
+            <p id="err-phone" class="hidden text-xs font-semibold text-red-600 mt-1"></p>
+          </div>
+        </div>
+
+        <div>
+          <label for="contact-message" class="block text-xs font-bold uppercase text-slate-700 mb-1.5">Message *</label>
+          <textarea id="contact-message" rows="4" placeholder="Write your academic inquiry or project feedback..."
+                    class="w-full px-4 py-3 rounded-xl border border-slate-300 text-sm focus:outline-none focus:border-blue-600"></textarea>
+          <p id="err-message" class="hidden text-xs font-semibold text-red-600 mt-1"></p>
+        </div>
+
+        <button type="submit" class="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm shadow transition">
+          Validate & Send Message
+        </button>
+      </form>
+    </section>
+
+  </main>
+
+  <!-- Semantic Footer -->
+  <footer class="bg-slate-900 text-slate-400 text-xs py-8 border-t border-slate-800 mt-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        <p class="text-white font-bold">Samuel Iyoha • Matric No: 2025/C/CSC/1089</p>
+        <p class="mt-0.5">COS 106 – Introduction to Web Technologies Term Project • MIVA Open University</p>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="https://github.com/SamYoha99" target="_blank" rel="noopener noreferrer" class="text-blue-400 hover:underline font-mono">@SamYoha99</a>
+        <span>© 2025 All Rights Reserved</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- External JavaScript File (COS 106 Requirement) -->
+  <script src="script.js"></script>
 </body>
 </html>
